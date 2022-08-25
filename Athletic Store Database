@@ -1,0 +1,32 @@
+CREATE TABLE store (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, category TEXT, price INTEGER); 
+
+INSERT INTO store VALUES (1, "bike shorts", 12, "shorts", 20.00);
+INSERT INTO store VALUES (2, "sports bra", 2, "bras", 15.00);
+INSERT INTO store VALUES (3, "yoga pants", 5, "pants", 25.00);
+INSERT INTO store VALUES (4, "running shorts", 7, "shorts", 19.99);
+INSERT INTO store VALUES (5, "flare leg pants", 8, "pants", 20.00);
+INSERT INTO store VALUES (6, "brallette", 5, "bras", 15.00);
+INSERT INTO store VALUES (7, "running shoes", 6, "shoes", 45.00);
+INSERT INTO store VALUES (8, "sandals", 9, "shoes", 40.00);
+INSERT INTO store VALUES (9, "slippers", 9, "shoes", 30.00);
+INSERT INTO store VALUES (10, "high waist stretch pant", 11, "pants", 20.00);
+INSERT INTO store VALUES (11, "high waist short", 8, "shorts", 12.00);
+INSERT INTO store VALUES (12, "pink headband", 5, "accessories", 5.00);
+INSERT INTO store VALUES (13, "yellow scrunchies", 6, "accessories", 5.00);
+INSERT INTO store VALUES (14, "flower headband", 5, "accessories", 5.00);
+INSERT INTO store VALUES (15, "black scrunchie", 11, "accessories", 5.00);SELECT * FROM store;
+
+What is the most expensive item in the store?
+SELECT MAX (price) FROM store;
+ 
+-Organizing items by price-
+SELECT * FROM store WHERE price >15;
+SELECT * FROM store WHERE price <10;
+SELECT * FROM store WHERE price >30;
+
+-Number of items in the store-
+SELECT SUM (quantity) FROM store;
+
+-Display the items ordered by price ascending and descending-
+SELECT * FROM store ORDER BY price ASC;
+SELECT * FROM store ORDER BY price DESC;
