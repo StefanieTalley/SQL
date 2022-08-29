@@ -1,0 +1,85 @@
+--I retrieved the Spotify data from Kaggle
+--I created a table to import the Spotify data
+
+CREATE TABLE BIT_DB0.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+);
+
+--Then I imported the data .csv into the table I created 
+
+--Then I started to explore the data
+
+SELECT * FROM BIT_DB0.Spotifydata;
+
+
+--What is the average danceability by artist and track? 
+SELECT artist_name, track_name,
+AVG(danceability)
+FROM BIT_DB0.Spotifydata
+GROUP BY artist_name, track_name;
+
+
+--Who are the top 10 artists based on popularity? 
+SELECT artist_name, popularity
+FROM BIT_DB0.Spotifydata
+Order By popularity DESC
+LIMIT 10;
+
+--What artist released the longest song? 
+SELECT artist_name, duration_ms
+FROM BIT_DB0.Spotifydata
+ORDER BY duration_ms DESC
+LIMIT 1;
+
+
+--What's the average danceability for the 10 most popular songs?
+SELECT track_name, AVG(danceability)
+FROM BIT_DB0.Spotifydata
+GROUP BY track_name
+ORDER BY popularity DESC
+LIMIT 10;
+
+--What song has the fastest tempo?
+SELECT track_name
+,tempo
+FROM BIT_DB0.Spotifydata
+ORDER BY tempo DESC
+LIMIT 1;
+
+--What is the average energy for the 10 least popular songs?
+SELECT track_name, AVG(energy), popularity
+FROM BIT_DB0.Spotifydata
+Group BY track_name
+ORDER BY popularity ASC
+LIMIT 10;
+
+--Display the top 10 most popular songs by song, tempo, danceability, and energy
+SELECT track_name, tempo, danceability, energy
+FROM BIT_DB0.Spotifydata
+GROUP BY track_name
+ORDER BY popularity DESC
+LIMIT 10;
+
+--20 songs with the shortest song duration
+SELECT track_name, duration_ms/1000 AS duration_seconds
+FROM BIT_DB0.Spotifydata
+Group By track_name
+ORder BY duration_ms ASC
+Limit 20;
