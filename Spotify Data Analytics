@@ -83,3 +83,15 @@ FROM BIT_DB0.Spotifydata
 Group By track_name
 ORder BY duration_ms ASC
 Limit 20;
+
+--Calculate the average popularity for the artists in the table. Then, for every artist with an average popularity of 90 or above, 
+--you need to show their name, their average popularity, and label them as a “Top Star”. How would you do this using a CTE?
+WITH Avg_popularityCTE
+AS (
+SELECT s.artist_name, AVG(s.popularity) AS pop_avg
+FROM Spotifydata s
+GROUP BY s.artist_name)
+
+SELECT artist_name, pop_avg, 'Top Star' AS tag
+FROM Avg_popularityCTE
+WHERE pop_avg >=90;
